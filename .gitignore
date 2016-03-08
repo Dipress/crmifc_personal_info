@@ -7,5 +7,5 @@ tmp
 *.log
 config/database.yml
 dump.rdb
-config/secret_token.yml
+config/secrets.yml
 .sass-cache
