@@ -1,0 +1,11 @@
+# Ignore bundler config
+.bundle
+
+# Ignore all logfiles and tempfiles.
+log/*.log
+tmp
+*.log
+config/database.yml
+dump.rdb
+config/secret_token.yml
+.sass-cache
