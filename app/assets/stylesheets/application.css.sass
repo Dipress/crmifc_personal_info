@@ -9,7 +9,20 @@
  * compiled file so the styles you add here take precedence over styles defined in any styles
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
- *
  *= require_tree .
  *= require_self
  */
+@import "bootstrap-sprockets"
+@import "bootstrap"
+
+body
+  background: #0ca3d2
+  .container
+    .row
+      .col-lg-12
+        background: white
+        padding: 20px 20px 20px
+        border-radius: 3px
+        box-shadow: 0 0 200px rgba(255, 255, 255, 0.5), 0 1px 2px rgba(0, 0, 0, 0.3)
+.field_with_errors
+  @extend .has-error

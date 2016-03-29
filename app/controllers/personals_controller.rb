@@ -1,39 +1,65 @@
 class PersonalsController < ApplicationController
-  before_filter :find_contract, only: [:show, :edit, :update]
-  
-  def show
+  before_filter :find_contract, only: [:new, :create, :edit, :update]
+
+  PERMITTED_PARAMS = [:contract_id, :contract_title, :contract_comment, :fio, :adress_post, 
+                      :address_connection, :telephone, :birthday, :passport_date, :passport_authority]
+
+  def index
+    @personals = Personal.all
   end
 
-  def edit
-    @contract.contract_parameter_type1.build
-    @contract.contract_parameter_type2.build
-    @contract.contract_parameter_type3.build
-    @contract.contract_parameter_type6.build
+  def new
+    @personal = Personal.new
   end
 
-  def update
-    if @contract.update(contract_params)
-      redirect_to personal_show_path
+  def create
+    @personal = Personal.new(create_params)
+    if @personal.save
+      #@contract.flags.where(pid: 72).update_all(val: 0)
+      redirect_to @personal
     else
-      render "edit"
+      render :new
     end
   end
 
-  def find_contract
-    #request = request.remote_ip
-    request = "10.22.183.151"
-    ip = request.split('.').collect(&:to_i).pack('C*')
-    @inet = InetService.find_by(addressFrom: ip)
-    @contract = Contract.find(@inet.contractId)
+  def show
+    @personal = Personal.find(params[:id])
   end
 
-  def contract_params
-    params.require(:contract).permit(:title, :comment,
-                                      contract_parameter_type1_attributes: [:pid, :val],
-                                      contract_parameter_type2_attributes: [:pid, :address],
-                                      contract_parameter_type3_attributes: [:pid, :email],
-                                      contract_parameter_type6_attributes: [:pid, :val],
-                                      phones_attributes: [:pid, :value]
-                                      )
+  def edit
+    @personal = Personal.find(params[:id])
+  end
+
+  def update
+    @personal = Personal.find(update_params)
+    if @personal.update(params[:personal])
+      redirect_to @personal
+    else
+      render :edit
+    end
+  end
+
+  def delete
+    @personal = Personal.find(params[:id])
+  end
+
+  def destroy
+    @personal = Personal.find(params[:id])
+    @personal.destroy
+    redirect_to @personal
+  end
+
+  def create_params
+    params.require(:personal).permit(PERMITTED_PARAMS)
+  end
+
+  def update_params; create_params end
+
+  def find_contract
+    #r = request.remote_ip
+    r = "10.10.230.170"
+    ip = r.split('.').collect(&:to_i).pack('C*')
+    inet = InetService.find_by(addressFrom: ip)
+    @contract = Contract.find(inet.contractId)
   end
 end
