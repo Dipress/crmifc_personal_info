@@ -3,7 +3,7 @@
   .form-actions
     = f.input :fio, label: 'ФИО', error: 'ФИО должно быть заполнено', hint: "Например: Иванов Иван Иванович", :input_html => { :class => 'form-control' }, required: true
   .form-actions
-    = f.input :address_post, label: 'Адрес (почтовый)', error: 'Необходимо заполнить почтовый адрес', hint: "Например: г. Симферополь, ул. Тургенева, 20",  required: true
+    = f.input :address_post, label: 'Адрес (почтовый)', error: 'Необходимо заполнить почтовый адрес', hint: "Например: г. Симферополь, ул. Тургенева, 20", required: true
   .form-actions
     = f.input :address_connection, label: 'Адрес (подключения)', error: 'Необходимо заполнить адрес подключения', hint: "Например: г. Симферополь, ул. Киевская, 114",  required: true
   .form-actions
@@ -20,4 +20,4 @@
     = f.input :contract_title, as: :hidden, input_html: { value: @contract.title }
     = f.input :contract_comment, as: :hidden, input_html: { value: @contract.comment }
   .form-actions
-    = f.button :submit
+    = f.button :submit, "Отправить данные"

@@ -20,7 +20,7 @@ class Personal
   VALID_DATE_REGEX = /\A(\d{1,2}).(\d{1,2}).(\d{4})\z/
   VALID_PHONE_REGEX = /\A79\d{9}\z/
 
-  validates :contract_id, :contract_title, :contract_comment, :fio, :address_post, :address_connection, :passport_authority, presence: true
+  validates :contract_id, :contract_title, :contract_comment, :fio, :address_post, :address_connection, :passport, :passport_authority, presence: true
 
   validates :birthday, :passport_date,  presence: true, format: { with: VALID_DATE_REGEX }
   validates :telephone, presence: true, format: { with: VALID_PHONE_REGEX }

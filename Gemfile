@@ -10,6 +10,7 @@ gem 'mongoid-slug', '~> 5.2.0'
 gem 'mongoid_auto_inc'
 gem 'haml'
 gem 'simple_form'
+gem 'net-ssh'
 #
 gem 'mtik'
 # Use SCSS for stylesheets
