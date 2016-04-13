@@ -33,20 +33,27 @@ ssh_options[:forward_agent] = true
 ssh_options[:keys] = [File.join(ENV["HOME"], ".ssh", "id_rsa")]
 
 namespace :deploy do
+  desc 'Unicorn restart'
   task :restart do
     run "if [ -f #{unicorn_pid} ] && [ -e /proc/$(cat #{unicorn_pid}) ]; then kill -USR2 `cat #{unicorn_pid}`; else cd #{latest_release} && bundle exec unicorn_rails -c #{unicorn_conf} -E #{rails_env} -D; fi"
   end
+
+  desc 'Unicorn start'
   task :start do
     run "cd #{latest_release} && bundle exec unicorn_rails -c #{unicorn_conf} -E #{rails_env} -D"
   end
+
+  desc 'Unicorn stop'
   task :stop do
     run "if [ -f #{unicorn_pid} ] && [ -e /proc/$(cat #{unicorn_pid}) ]; then kill -QUIT `cat #{unicorn_pid}`; fi"
   end
-  task :db do
-    run "ls -s /var/www/crmifc_personal_info/application.yml #{current_release}/config/application.yml"
-    run "ls -s /var/www/crmifc_personal_info/database.yml #{current_release}/config/database.yml"
-    run "ls -s /var/www/crmifc_personal_info/mongoid.yml  #{current_release}/config/mongoid.yml"
-    run "ls -s /var/www/crmifc_personal_info/secrets.yml #{current_release}/config/secrets.yml"
+
+  desc 'Create symlinks on files'
+  task :files do
+    execute "ls -s /var/www/crmifc_personal_info/application.yml #{current_release}/config/application.yml"
+    execute "ls -s /var/www/crmifc_personal_info/database.yml #{current_release}/config/database.yml"
+    execute "ls -s /var/www/crmifc_personal_info/mongoid.yml  #{current_release}/config/mongoid.yml"
+    execute "ls -s /var/www/crmifc_personal_info/secrets.yml #{current_release}/config/secrets.yml"
   end
 end
 
