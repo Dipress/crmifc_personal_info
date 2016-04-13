@@ -58,4 +58,4 @@ namespace :deploy do
 end
 
 before "deploy:assets:precompile", "deploy:symlinks"
-after "deploy", "deploy:cleanup", "deploy:files", "deploy:restart"
+after "deploy", "deploy:cleanup", "deploy:restart"
