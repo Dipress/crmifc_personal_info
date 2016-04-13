@@ -16,7 +16,7 @@ class PersonalsController < ApplicationController
   def create
     @personal = Personal.new(create_params)
     if @personal.save
-      Net::SSH.start('hostname', "admin", password: "password") do |ssh|
+      Net::SSH.start(ENV["MIKROTIK_HOST"], "admin", password: ENV["MIKROTIK_PASSWORD"]) do |ssh|
         ssh.exec!("/ip firewall address-list remove [find where comment=#{@r}]")
       end
       @contract.flags.where(pid: 72).update_all(val: 0)
@@ -60,9 +60,8 @@ class PersonalsController < ApplicationController
   def update_params; create_params end
 
   def find_contract
-    #@r = request.remote_ip
-    #@url = request.url
-    @r = "10.10.230.170"
+    @r = request.remote_ip
+    @url = request.url
     ip = @r.split('.').collect(&:to_i).pack('C*')
     inet = InetService.find_by(addressFrom: ip)
     @contract = Contract.find(inet.contractId)
