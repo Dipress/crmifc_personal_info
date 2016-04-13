@@ -60,8 +60,7 @@ class PersonalsController < ApplicationController
   def update_params; create_params end
 
   def find_contract
-    @r = request.remote_ip
-    @url = request.url
+    @r = request.headers["X-Real-IP"]
     ip = @r.split('.').collect(&:to_i).pack('C*')
     inet = InetService.find_by(addressFrom: ip)
     @contract = Contract.find(inet.contractId)

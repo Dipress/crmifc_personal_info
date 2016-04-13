@@ -23,5 +23,8 @@ module CrmifcPersonalInfo
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.assets.precompile += %w(*.png *.jpg *.jpeg *.gif)
     config.active_record.raise_in_transactional_callbacks = true
+    config.generators do |g|
+        g.orm :mongoid
+    end
   end
 end
