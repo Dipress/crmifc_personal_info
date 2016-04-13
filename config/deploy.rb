@@ -49,7 +49,7 @@ namespace :deploy do
   end
 
   desc 'Create symlinks on files'
-  task :files do
+  task :symlinks do
     run "ls -s /var/www/crmifc_personal_info/application.yml #{current_release}/config/application.yml"
     run "ls -s /var/www/crmifc_personal_info/database.yml #{current_release}/config/database.yml"
     run "ls -s /var/www/crmifc_personal_info/mongoid.yml  #{current_release}/config/mongoid.yml"
@@ -57,5 +57,5 @@ namespace :deploy do
   end
 end
 
-before "deploy:assets:precompile", "deploy:db"
+before "deploy:assets:precompile", "deploy:symlinks"
 after "deploy", "deploy:cleanup", "deploy:files", "deploy:restart"
