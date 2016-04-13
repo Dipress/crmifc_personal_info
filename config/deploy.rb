@@ -50,10 +50,10 @@ namespace :deploy do
 
   desc 'Create symlinks on files'
   task :symlinks do
-    run "ls -s /var/www/crmifc_personal_info/application.yml #{current_release}/config/application.yml"
-    run "ls -s /var/www/crmifc_personal_info/database.yml #{current_release}/config/database.yml"
-    run "ls -s /var/www/crmifc_personal_info/mongoid.yml  #{current_release}/config/mongoid.yml"
-    run "ls -s /var/www/crmifc_personal_info/secrets.yml #{current_release}/config/secrets.yml"
+    run "ln -s /var/www/crmifc_personal_info/application.yml #{current_release}/config/application.yml"
+    run "ln -s /var/www/crmifc_personal_info/database.yml #{current_release}/config/database.yml"
+    run "ln -s /var/www/crmifc_personal_info/mongoid.yml  #{current_release}/config/mongoid.yml"
+    run "ln -s /var/www/crmifc_personal_info/secrets.yml #{current_release}/config/secrets.yml"
   end
 end
 
