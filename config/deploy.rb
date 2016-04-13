@@ -1,4 +1,4 @@
-set :rvm_ruby_string, "2.0.0@crmifc_personal_info"
+set :rvm_ruby_string, "2.0.0-p0@crmifc_personal_info"
 require "rvm/capistrano"
 require "bundler/capistrano"
 
