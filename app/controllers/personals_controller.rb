@@ -30,6 +30,9 @@ class PersonalsController < ApplicationController
     @personal = Personal.find(params[:id])
   end
 
+  def failing
+  end
+
   def edit
     @personal = Personal.find(params[:id])
   end
@@ -61,9 +64,13 @@ class PersonalsController < ApplicationController
 
   def find_contract
     @r = request.headers["X-Real-IP"]
-    ip = @r.split('.').collect(&:to_i).pack('C*')
-    inet = InetService.find_by(addressFrom: ip)
-    @contract = Contract.find(inet.contractId)
+    if @r.nil?
+      redirect_to failing_personals_path
+    else
+      ip = @r.split('.').collect(&:to_i).pack('C*')
+      inet = InetService.find_by(addressFrom: ip)
+      @contract = Contract.find(inet.contractId)
+    end
   end
 
 end
