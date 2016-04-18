@@ -1,0 +1,38 @@
+%h1
+  Новые данные по договору, #{@personal.contract_title}
+%table.table.table-striped
+  %thead
+    %tr
+      %th Название
+      %th Значение
+  %tbody
+    %tr
+      %td Номер договора
+      %td= @personal.contract_title
+    %tr
+      %td Наименование абонента
+      %td= @personal.contract_comment
+    %tr
+      %td ФИО абонента
+      %td= @personal.fio
+    %tr
+      %td Адрес (почтовый)
+      %td= @personal.address_post
+    %tr
+      %td Адрес (подключения)
+      %td= @personal.address_connection
+    %tr
+      %td Телефон
+      %td = @personal.telephone
+    %tr
+      %td Дата рождения
+      %td= @personal.birthday
+    %tr
+      %td Паспорт серия и номер
+      %td= @personal.passport
+    %tr
+      %td Дата выдачи паспорта
+      %td= @personal.passport_date
+    %tr
+      %td Кем выдан паспорт
+      %td= @personal.passport_authority

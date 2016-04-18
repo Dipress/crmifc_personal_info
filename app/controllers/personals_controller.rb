@@ -72,5 +72,4 @@ class PersonalsController < ApplicationController
       @contract = Contract.find(inet.contractId)
     end
   end
-
 end

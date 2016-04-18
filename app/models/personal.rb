@@ -3,6 +3,8 @@ class Personal
   include Mongoid::Timestamps::Created
   include Mongoid::Slug
 
+  after_create :personal_completion_notification
+
   field :contract_id, type: Integer
   field :contract_title, type: String
   field :contract_comment, type: String
@@ -24,4 +26,10 @@ class Personal
 
   validates :birthday, :passport_date,  presence: true, format: { with: VALID_DATE_REGEX }
   validates :telephone, presence: true, format: { with: VALID_PHONE_REGEX }
+
+  private
+
+    def personal_completion_notification
+      PersonalMailer.personal_added(self).deliver
+    end
 end
