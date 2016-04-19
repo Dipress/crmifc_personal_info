@@ -69,7 +69,7 @@ class PersonalsController < ApplicationController
     else
       ip = @r.split('.').collect(&:to_i).pack('C*')
       inet = InetService.find_by(addressFrom: ip)
-      if inet.contractId.nil?
+      if inet.nil?
         redirect_to failing_personals_path
       else
         @contract = Contract.find(inet.contractId)
