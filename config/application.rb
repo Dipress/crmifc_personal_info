@@ -26,5 +26,8 @@ module CrmifcPersonalInfo
     config.generators do |g|
         g.orm :mongoid
     end
+    config.generators do |g|
+      g.template_engine :haml
+    end
   end
 end
