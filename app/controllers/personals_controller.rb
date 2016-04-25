@@ -64,7 +64,7 @@ class PersonalsController < ApplicationController
 
   def find_contract
     @r = request.headers["X-Real-IP"]
-    if @r.nil?
+    if @r.nil? or @r.empty?
       redirect_to failing_personals_path
     else
       ip = @r.split('.').collect(&:to_i).pack('C*')
